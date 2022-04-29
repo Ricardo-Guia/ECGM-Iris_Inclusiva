@@ -10,7 +10,7 @@ Passos para correr o projeto:
 
 backend (Laravel):
 - make sure you have composer installed
-- composer install
+- composer install (or composer install --ignore-platform-reqs)
 - to run the project: php artisan serve
 
 - open frontend folder
