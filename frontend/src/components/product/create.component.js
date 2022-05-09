@@ -7,7 +7,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom'
 
-export default function CreateProduct() {
+export default function CreateAssociado() {
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("")
@@ -19,16 +19,16 @@ export default function CreateProduct() {
 		setImage(event.target.files[0]);
 	};
 
-  const createProduct = async (e) => {
+  const createAssociado = async (e) => {
     e.preventDefault();
 
     const formData = new FormData()
 
-    formData.append('title', title)
-    formData.append('description', description)
-    formData.append('image', image)
+    formData.append('título', title)
+    formData.append('descrição', description)
+    formData.append('imagem', image)
 
-    await axios.post(`http://localhost:8000/api/products`, formData).then(({data})=>{
+    await axios.post(`http://localhost:8000/api/associados`, formData).then(({data})=>{
       Swal.fire({
         icon:"success",
         text:data.message
@@ -52,7 +52,7 @@ export default function CreateProduct() {
         <div className="col-12 col-sm-12 col-md-6">
           <div className="card">
             <div className="card-body">
-              <h4 className="card-title">Create Product</h4>
+              <h4 className="card-title">Criar Associado</h4>
               <hr />
               <div className="form-wrapper">
                 {
@@ -72,11 +72,11 @@ export default function CreateProduct() {
                     </div>
                   )
                 }
-                <Form onSubmit={createProduct}>
+                <Form onSubmit={createAssociado}>
                   <Row> 
                       <Col>
                         <Form.Group controlId="Name">
-                            <Form.Label>Title</Form.Label>
+                            <Form.Label>Título</Form.Label>
                             <Form.Control type="text" value={title} onChange={(event)=>{
                               setTitle(event.target.value)
                             }}/>
@@ -86,7 +86,7 @@ export default function CreateProduct() {
                   <Row className="my-3">
                       <Col>
                         <Form.Group controlId="Description">
-                            <Form.Label>Description</Form.Label>
+                            <Form.Label>Descrição</Form.Label>
                             <Form.Control as="textarea" rows={3} value={description} onChange={(event)=>{
                               setDescription(event.target.value)
                             }}/>
@@ -96,13 +96,13 @@ export default function CreateProduct() {
                   <Row>
                     <Col>
                       <Form.Group controlId="Image" className="mb-3">
-                        <Form.Label>Image</Form.Label>
+                        <Form.Label>Imagem</Form.Label>
                         <Form.Control type="file" onChange={changeHandler} />
                       </Form.Group>
                     </Col>
                   </Row>
                   <Button variant="primary" className="mt-2" size="lg" block="block" type="submit">
-                    Save
+                    Guardar
                   </Button>
                 </Form>
               </div>

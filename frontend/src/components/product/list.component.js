@@ -6,27 +6,27 @@ import Swal from 'sweetalert2'
 
 export default function List() {
 
-    const [products, setProducts] = useState([])
+    const [associados, setAssociados] = useState([])
 
     useEffect(()=>{
-        fetchProducts() 
+        fetchAssociados() 
     },[])
 
-    const fetchProducts = async () => {
-        await axios.get(`http://localhost:8000/api/products`).then(({data})=>{
-            setProducts(data)
+    const fetchAssociados = async () => {
+        await axios.get(`http://localhost:8000/api/associados`).then(({data})=>{
+            setAssociados(data)
         })
     }
 
-    const deleteProduct = async (id) => {
+    const deleteAssociado = async (id) => {
         const isConfirm = await Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
+            title: 'Tem a certeza?',
+            text: "Não vai ser possível reverter isto!",
+            icon: 'aviso',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Sim, apagar!'
           }).then((result) => {
             return result.isConfirmed
           });
@@ -35,12 +35,12 @@ export default function List() {
             return;
           }
 
-          await axios.delete(`http://localhost:8000/api/products/${id}`).then(({data})=>{
+          await axios.delete(`http://localhost:8000/api/associados/${id}`).then(({data})=>{
             Swal.fire({
                 icon:"success",
                 text:data.message
             })
-            fetchProducts()
+            fetchAssociados()
           }).catch(({response:{data}})=>{
             Swal.fire({
                 text:data.message,
@@ -53,8 +53,8 @@ export default function List() {
       <div className="container">
           <div className="row">
             <div className='col-12'>
-                <Link className='btn btn-primary mb-2 float-end' to={"/product/create"}>
-                    Create Product
+                <Link className='btn btn-primary mb-2 float-end' to={"/associado/create"}>
+                    Criar associado
                 </Link>
             </div>
             <div className="col-12">
@@ -63,28 +63,28 @@ export default function List() {
                         <table className="table table-bordered mb-0 text-center">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Image</th>
-                                    <th>Actions</th>
+                                    <th>Título</th>
+                                    <th>Descrição</th>
+                                    <th>Imagem</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    products.length > 0 && (
-                                        products.map((row, key)=>(
+                                    associados.length > 0 && (
+                                        associados.map((row, key)=>(
                                             <tr key={key}>
                                                 <td>{row.title}</td>
                                                 <td>{row.description}</td>
                                                 <td>
-                                                    <img width="50px" src={`http://localhost:8000/storage/product/image/${row.image}`} />
+                                                    <img width="50px" src={`http://localhost:8000/storage/associados/imagem/${row.image}`} />
                                                 </td>
                                                 <td>
-                                                    <Link to={`/product/edit/${row.id}`} className='btn btn-success me-2'>
-                                                        Edit
+                                                    <Link to={`/associado/edit/${row.id}`} className='btn btn-success me-2'>
+                                                        Editar
                                                     </Link>
-                                                    <Button variant="danger" onClick={()=>deleteProduct(row.id)}>
-                                                        Delete
+                                                    <Button variant="danger" onClick={()=>deleteAssociado(row.id)}>
+                                                        Apagar
                                                     </Button>
                                                 </td>
                                             </tr>

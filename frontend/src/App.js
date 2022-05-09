@@ -7,16 +7,16 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import { BrowserRouter as Router , Routes, Route, Link } from "react-router-dom";
 
-import EditProduct from "./components/product/edit.component";
-import ProductList from "./components/product/list.component";
-import CreateProduct from "./components/product/create.component";
+import EditAssociado from "./components/associado/edit.component";
+import AssociadoList from "./components/associado/list.component";
+import CreateAssociado from "./components/associado/create.component";
 
 function App() {
   return (<Router>
     <Navbar bg="primary">
       <Container>
         <Link to={"/"} className="navbar-brand text-white">
-          Basic Crud App
+          Projeto Íris Inclusiva
         </Link>
       </Container>
     </Navbar>
@@ -25,9 +25,9 @@ function App() {
       <Row>
         <Col md={12}>
           <Routes>
-            <Route path="/product/create" element={<CreateProduct />} />
-            <Route path="/product/edit/:id" element={<EditProduct />} />
-            <Route exact path='/' element={<ProductList />} />
+            <Route path="/associado/create" element={<CreateAssociado />} />
+            <Route path="/associado/edit/:id" element={<EditAssociado />} />
+            <Route exact path='/' element={<AssociadoList />} />
           </Routes>
         </Col>
       </Row>
