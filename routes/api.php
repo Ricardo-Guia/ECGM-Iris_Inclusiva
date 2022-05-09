@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AssociadoController;
 
 
 
@@ -16,7 +16,7 @@ use App\Http\Controllers\ProductController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::resource('products',ProductController::class);
+Route::resource('associados',AssociadoController::class);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
     

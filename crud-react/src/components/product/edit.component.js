@@ -18,12 +18,12 @@ export default function EditUser() {
   const [validationError,setValidationError] = useState({})
 
   useEffect(()=>{
-    fetchProduct()
+    fetchAssociado()
   },[])
 
-  const fetchProduct = async () => {
-    await axios.get(`http://localhost:8000/api/products/${id}`).then(({data})=>{
-      const { title, description } = data.product
+  const fetchAssociado = async () => {
+    await axios.get(`http://localhost:8000/api/associados/${id}`).then(({data})=>{
+      const { title, description } = data.associado
       setTitle(title)
       setDescription(description)
     }).catch(({response:{data}})=>{
@@ -38,18 +38,18 @@ export default function EditUser() {
 		setImage(event.target.files[0]);
 	};
 
-  const updateProduct = async (e) => {
+  const updateAssociado = async (e) => {
     e.preventDefault();
 
     const formData = new FormData()
     formData.append('_method', 'PATCH');
-    formData.append('title', title)
-    formData.append('description', description)
+    formData.append('título', title)
+    formData.append('descrição', description)
     if(image!==null){
-      formData.append('image', image)
+      formData.append('imagem', image)
     }
 
-    await axios.post(`http://localhost:8000/api/products/${id}`, formData).then(({data})=>{
+    await axios.post(`http://localhost:8000/api/associados/${id}`, formData).then(({data})=>{
       Swal.fire({
         icon:"success",
         text:data.message
@@ -73,7 +73,7 @@ export default function EditUser() {
         <div className="col-12 col-sm-12 col-md-6">
           <div className="card">
             <div className="card-body">
-              <h4 className="card-title">Update Product</h4>
+              <h4 className="card-title">Atualizar associado</h4>
               <hr />
               <div className="form-wrapper">
                 {
@@ -93,11 +93,11 @@ export default function EditUser() {
                     </div>
                   )
                 }
-                <Form onSubmit={updateProduct}>
+                <Form onSubmit={updateAssociado}>
                   <Row> 
                       <Col>
                         <Form.Group controlId="Name">
-                            <Form.Label>Title</Form.Label>
+                            <Form.Label>Título</Form.Label>
                             <Form.Control type="text" value={title} onChange={(event)=>{
                               setTitle(event.target.value)
                             }}/>
@@ -107,7 +107,7 @@ export default function EditUser() {
                   <Row className="my-3">
                       <Col>
                         <Form.Group controlId="Description">
-                            <Form.Label>Description</Form.Label>
+                            <Form.Label>Descrição</Form.Label>
                             <Form.Control as="textarea" rows={3} value={description} onChange={(event)=>{
                               setDescription(event.target.value)
                             }}/>
@@ -117,13 +117,13 @@ export default function EditUser() {
                   <Row>
                     <Col>
                       <Form.Group controlId="Image" className="mb-3">
-                        <Form.Label>Image</Form.Label>
+                        <Form.Label>Imagem</Form.Label>
                         <Form.Control type="file" onChange={changeHandler} />
                       </Form.Group>
                     </Col>
                   </Row>
                   <Button variant="primary" className="mt-2" size="lg" block="block" type="submit">
-                    Update
+                    Atualizar
                   </Button>
                 </Form>
               </div>
