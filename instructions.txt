@@ -2,6 +2,7 @@
 Iris Inclusiva
 
 
+<<<<<<< HEAD:instructions.txt
 Passos para correr o projeto:
  
 -Criar base de dados: gestaoassociados
@@ -19,3 +20,6 @@ Front (React):
  - npm install
  - npm run start
 
+=======
+Primeiro commit do Projeto
+>>>>>>> parent of da81afe (renamed frontend folder):README.txt
