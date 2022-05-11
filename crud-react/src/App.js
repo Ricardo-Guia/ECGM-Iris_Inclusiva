@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import { BrowserRouter as Router , Routes, Route, Link } from "react-router-dom";
 
+import Login from "./Login";
 import EditAssociado from "./components/associado/edit.component";
 import AssociadoList from "./components/associado/list.component";
 import CreateAssociado from "./components/associado/create.component";
@@ -16,7 +17,7 @@ function App() {
     <Navbar bg="primary">
       <Container>
         <Link to={"/"} className="navbar-brand text-white">
-          Projeto Íris Inclusiva
+         Íris Inclusiva - Gestão Associados
         </Link>
       </Container>
     </Navbar>
@@ -27,7 +28,8 @@ function App() {
           <Routes>
             <Route path="/associado/create" element={<CreateAssociado />} />
             <Route path="/associado/edit/:id" element={<EditAssociado />} />
-            <Route exact path='/' element={<AssociadoList />} />
+            <Route path="/associado/list" element={<AssociadoList />} />
+            <Route exact path='/' element={<Login />} />
           </Routes>
         </Col>
       </Row>

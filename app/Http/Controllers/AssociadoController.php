@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Models\Associado;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,10 @@ class AssociadoController extends Controller
         $request->validate([
             'título'=>'required',
             'descrição'=>'required',
-            'imagem'=>'required|imagem'
+            'imagem'=>'required|imagem',
+            'field' => 'request|string|max:255',
+            'benennung' => 'required|string|max:191|min:1',
+            'aktiv' => 'required|boolean'
         ]);
 
         try{
@@ -73,10 +77,14 @@ class AssociadoController extends Controller
      */
     public function update(Request $request, Associado $associado)
     {
-        $request->validate([
+        
+        $data = $request->validate([
             'título'=>'required',
             'descrição'=>'required',
-            'imagem'=>'nullable'
+            'imagem'=>'nullable',
+            'field' => 'request|string|max:255',
+            'benennung' => 'required|string|max:191|min:1',
+            'aktiv' => 'required|boolean'
         ]);
 
         try{
@@ -93,9 +101,9 @@ class AssociadoController extends Controller
                     }
                 }
 
-                $imageName = Str::random().'.'.$request->imagem->getClientOriginalExtension();
-                Storage::disk('public')->putFileAs('associado/imagem', $request->imagem,$imageName);
-                $associado->imagem = $imageName;
+                $imageName = Str::random().'.'.$request->image->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs('associado/imagem', $request->image,$imageName);
+                $associado->image = $imageName;
                 $associado->save();
             }
 
